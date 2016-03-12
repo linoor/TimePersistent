@@ -1,15 +1,17 @@
 from datetime import datetime
 
 # Create your views here.
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_exempt
 
 from main.models import Voyage, Place
 
 
+@csrf_exempt
 def start_timer(request):
     if request.method == 'POST':
-        if not request.POST:
+        if not request.POST or request.POST == {}:
             return HttpResponse(status=400)
         r = request.POST
         voyage = Voyage()
@@ -36,4 +38,6 @@ def start_timer(request):
         return JsonResponse({
             "id": voyage.id
         })
+    else:
+        return HttpResponseNotFound('<h1>Page not found</h1>')
 

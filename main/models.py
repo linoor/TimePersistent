@@ -11,7 +11,7 @@ class Place(models.Model):
 
 class Voyage(models.Model):
     time_started = models.DateTimeField(blank=False)
-    time_ended = models.DateTimeField(blank=False)
+    time_ended = models.DateTimeField(blank=True, null=True)
     type = models.CharField(max_length=50)
     from_place = models.ForeignKey(Place, related_name="from_place")
     to_place = models.ForeignKey(Place, related_name="to_place")

@@ -31,3 +31,20 @@ class Tests(TestCase):
         r = self.client.post("/stop_timer", data={})
         self.assertEqual("Voyage {id} has been stopped".format(id=2), r.content)
         self.assertIsNotNone(Voyage.objects.latest('time_started'))
+
+    def test_only_adds_place_once(self):
+        self.assertEqual(Place.objects.all().count(), 0)
+        r = self.client.post("/start_timer", data={
+            "note": "asd",
+            "type": "asd",
+            "to_place": "asd",
+            "from_place": "asd2",
+        })
+        self.assertEqual(Place.objects.all().count(), 2)
+        r = self.client.post("/start_timer", data={
+            "note": "asd",
+            "type": "asd",
+            "to_place": "asd",
+            "from_place": "asd2",
+        })
+        self.assertEqual(Place.objects.all().count(), 2)

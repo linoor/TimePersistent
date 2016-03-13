@@ -23,8 +23,8 @@ def start_timer(request):
             voyage.from_place = from_place
         except Place.DoesNotExist:
             place = Place()
-            place.save()
             place.name = r['from_place']
+            place.save()
             voyage.from_place = place
         try:
             to_place = Place.objects.get(name=r['to_place'])

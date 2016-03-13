@@ -42,3 +42,12 @@ def start_timer(request):
     else:
         return HttpResponseNotFound('<h1>Page not found</h1>')
 
+
+@api_view(['POST'])
+def stop_timer(request):
+    if request.method == 'POST':
+        voyage = Voyage.objects.latest('time_started')
+        voyage.time_ended = now()
+        voyage.save()
+        return HttpResponse("Voyage {id} has been stopped".format(id=voyage.id))
+

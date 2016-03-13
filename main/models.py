@@ -16,3 +16,11 @@ class Voyage(models.Model):
     from_place = models.ForeignKey(Place, related_name="from_place")
     to_place = models.ForeignKey(Place, related_name="to_place")
     note = JSONField(blank=True)
+
+    def __repr__(self):
+        return "id: {id}, time started: {time_started}, time ended: {time_ended}, type: {type}".format(
+            id=self.id,
+            time_started=self.time_started,
+            time_ended=self.time_ended,
+            type=self.type
+        )

@@ -3,16 +3,17 @@ from datetime import datetime
 # Create your views here.
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from django.utils.timezone import now
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from rest_framework.exceptions import ParseError
 
 from main.models import Voyage, Place
 
 
-@csrf_exempt
+@api_view(['POST'])
 def start_timer(request):
     if request.method == 'POST':
-        if not request.POST or request.POST == {}:
-            return HttpResponse(status=400)
+        if not request.POST:
+            raise ParseError("You should provide from, to, note, type")
         r = request.POST
         voyage = Voyage()
         voyage.time_started = now()

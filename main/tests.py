@@ -1,3 +1,5 @@
+import json
+
 from django.test import TestCase
 
 # Create your tests here.
@@ -27,9 +29,10 @@ class Tests(TestCase):
             "to_place": "asd",
             "from_place": "asd",
         })
+        id = json.loads(r.content)['id']
         self.assertEqual(Voyage.objects.all().count(), 1)
         r = self.client.post("/stop_timer", data={})
-        self.assertEqual("Voyage {id} has been stopped".format(id=2), r.content)
+        self.assertEqual("Voyage {id} has been stopped".format(id=id), r.content)
         self.assertIsNotNone(Voyage.objects.latest('time_started'))
 
     def test_only_adds_place_once(self):

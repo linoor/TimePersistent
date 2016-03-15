@@ -48,6 +48,8 @@ def start_voyage(request):
 def stop_voyage(request):
     if request.method == 'POST':
         voyage = Voyage.objects.latest('time_started')
+        if voyage.time_ended:
+            return HttpResponse("Voyage {id} has already been stopped".format(id=voyage.id))
         voyage.time_ended = now()
         voyage.save()
         return HttpResponse("Voyage {id} has been stopped".format(id=voyage.id))

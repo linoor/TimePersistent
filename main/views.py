@@ -2,6 +2,7 @@ from datetime import datetime
 
 # Create your views here.
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
+from django.shortcuts import render
 from django.utils.timezone import now
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import ParseError
@@ -51,3 +52,6 @@ def stop_voyage(request):
         voyage.save()
         return HttpResponse("Voyage {id} has been stopped".format(id=voyage.id))
 
+
+def main(request):
+    return render(request, template_name="main.html")

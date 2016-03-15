@@ -8,7 +8,7 @@ import Http
 import Json.Decode as Decoder exposing ((:=))
 
 server : String
-server = "http://127.0.0.1:8080/"
+server = "http://127.0.0.1:8000/"
 
 type Action = NoOp
             | OnInit (Result Http.Error Int)
@@ -49,7 +49,7 @@ postJson : String -> String -> Task Http.RawError Http.Response
 postJson url body =
   Http.send Http.defaultSettings {
           verb = "POST",
-          headers = [("Header-Type", "application/json")],
+          headers = [("Content-Type", "application/json")],
           url = url,
           body = Http.string body
         }

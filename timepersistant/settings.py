@@ -56,7 +56,7 @@ ROOT_URLCONF = 'timepersistant.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['main/static'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

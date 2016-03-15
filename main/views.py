@@ -10,7 +10,7 @@ from main.models import Voyage, Place
 
 
 @api_view(['POST'])
-def start_timer(request):
+def start_voyage(request):
     if request.method == 'POST':
         if not request.POST:
             raise ParseError("You should provide from, to, note, type")
@@ -44,7 +44,7 @@ def start_timer(request):
 
 
 @api_view(['POST'])
-def stop_timer(request):
+def stop_voyage(request):
     if request.method == 'POST':
         voyage = Voyage.objects.latest('time_started')
         voyage.time_ended = now()

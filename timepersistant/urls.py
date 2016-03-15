@@ -20,6 +20,6 @@ from main import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^start_timer', views.start_timer, name="start_timer"),
-    url(r'^stop_timer', views.stop_timer, name="stop_timer")
+    url(r'^start_voyage', views.start_voyage, name="start_voyage"),
+    url(r'^stop_voyage', views.stop_voyage, name="stop_voyage")
 ]

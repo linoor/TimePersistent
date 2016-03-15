@@ -13,7 +13,7 @@ from main.models import Voyage, Place
 @api_view(['POST'])
 def start_voyage(request):
     if request.method == 'POST':
-        if not request.POST:
+        if not request.data:
             raise ParseError("You should provide from, to, note, type")
         r = request.POST
         voyage = Voyage()

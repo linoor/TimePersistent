@@ -49,7 +49,7 @@ postJson : String -> String -> Task Http.RawError Http.Response
 postJson url body =
   Http.send Http.defaultSettings {
           verb = "POST",
-          headers = [("Content-Type", "application/json")],
+          headers = [("Content-Type", "application/json"), ("Accept", "application/json")],
           url = url,
           body = Http.string body
         }

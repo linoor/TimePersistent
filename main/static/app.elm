@@ -56,7 +56,7 @@ postJson url body =
 
 startVoyage : Effects Action
 startVoyage =
-  postJson (server ++ "start_voyage") """{"from_place": "asd", "to_place": "asd", "type": "bus", "note": "no note"}"""
+  postJson (server ++ "start_voyage") """{"from_place": "asd", "to_place": "asd", "type": "bus", "note": {"through": "politechnika"}}"""
       |> Task.toResult
       |> Task.map OnStart
       |> Effects.task

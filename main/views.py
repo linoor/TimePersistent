@@ -1,6 +1,6 @@
-from datetime import datetime
-
 # Create your views here.
+import json
+
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 from django.utils.timezone import now
@@ -15,10 +15,10 @@ def start_voyage(request):
     if request.method == 'POST':
         if not request.data:
             raise ParseError("You should provide from, to, note, type")
-        r = request.POST
+        r = request.data
         voyage = Voyage()
         voyage.time_started = now()
-        voyage.note = r['note']
+        voyage.note = json.dumps(r['note'])
         try:
             from_place = Place.objects.get(name=r['from_place'])
             voyage.from_place = from_place

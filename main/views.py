@@ -12,6 +12,7 @@ from main.models import Voyage, Place
 
 @api_view(['POST'])
 def start_voyage(request):
+    # TODO write all of the correct arguments when bad request
     if request.method == 'POST':
         if not request.data:
             raise ParseError("You should provide from, to, note, type")

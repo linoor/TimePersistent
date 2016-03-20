@@ -1,0 +1,1 @@
+web: gunicorn timepersistant/wsgi:application --log-file -

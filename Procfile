@@ -1,1 +1,1 @@
-web: gunicorn timepersistant/wsgi:application --log-file -
+web: gunicorn timepersistant.wsgi --log-file -

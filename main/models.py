@@ -1,5 +1,8 @@
 from __future__ import unicode_literals
 
+from time import timezone
+
+import pytz as pytz
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 
@@ -29,13 +32,13 @@ class Voyage(models.Model):
         )
 
     def __str__(self):
-        return "id: {id}, time started: {time_started}, " \
-               "time ended: {time_ended}, type: {type}, " \
-               "from place: {from_place}, to place: {to_place}".format(
-            id=self.id,
-            time_started=self.time_started,
-            time_ended=self.time_ended,
-            type=self.type,
+        timezone = pytz.timezone('Poland')
+        return '{date} {time_1}--{time_2} ({time_elapsed} minutes) {from_place}-->{to_place}  by {type}'.format(
+            date=self.time_started.astimezone(timezone).strftime('%Y-%m-%d'),
+            time_1=self.time_started.astimezone(timezone).strftime('%H:%M:%S'),
+            time_2=self.time_ended.strftime('%H:%M:%S') if self.time_ended else '',
             from_place=self.from_place,
-            to_place=self.to_place
+            to_place=self.to_place,
+            type=self.type,
+            time_elapsed=(self.time_ended-self.time_started).seconds // 60 if self.time_ended else 0
         )

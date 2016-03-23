@@ -34,9 +34,9 @@ class Voyage(models.Model):
     def __str__(self):
         timezone = pytz.timezone('Poland')
         return '{date} {time_1}--{time_2} ({time_elapsed} minutes) {from_place}-->{to_place}  by {type}'.format(
-            date=self.time_started.astimezone(timezone).strftime('%Y-%m-%d'),
+            date=self.time_started.strftime('%Y-%m-%d'),
             time_1=self.time_started.astimezone(timezone).strftime('%H:%M:%S'),
-            time_2=self.time_ended.strftime('%H:%M:%S') if self.time_ended else '',
+            time_2=self.time_ended.astimezone(timezone).strftime('%H:%M:%S') if self.time_ended else '',
             from_place=self.from_place,
             to_place=self.to_place,
             type=self.type,

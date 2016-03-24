@@ -58,4 +58,4 @@ def stop_voyage(request):
 
 
 def main(request):
-    return render(request, template_name="main.html")
+    return render(request, template_name="index.html")

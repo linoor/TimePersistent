@@ -1,0 +1,27 @@
+{
+  "name": "timepersistent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-loader": "^6.2.4",
+    "react": "^0.14.7",
+    "webpack": "^1.12.14",
+    "webpack-bundle-tracker": "0.0.93"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linoor/TimePersistent.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linoor/TimePersistent/issues"
+  },
+  "homepage": "https://github.com/linoor/TimePersistent#readme"
+}

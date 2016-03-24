@@ -20,6 +20,7 @@ def start_voyage(request):
         voyage = Voyage()
         voyage.time_started = now()
         voyage.note = json.dumps(r['note'])
+        voyage.type = r['type']
         try:
             from_place = Place.objects.get(name=r['from_place'])
             voyage.from_place = from_place

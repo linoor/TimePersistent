@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^start_voyage', views.start_voyage, name="start_voyage"),
     url(r'^stop_voyage', views.stop_voyage, name="stop_voyage"),
+    url(r'^voyage', views.voyage, name='voyage'),
     url(r'^$', views.main, name="main"),
 ]

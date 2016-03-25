@@ -59,3 +59,20 @@ def stop_voyage(request):
 
 def main(request):
     return render(request, template_name="index.html")
+
+
+@api_view(['GET'])
+def voyage(request):
+    if request.method == 'GET':
+        try:
+            last_voyage = Voyage.objects.latest('time_started')
+
+            if last_voyage.time_ended:
+                return JsonResponse({})
+            else:
+                return JsonResponse({
+                    'id': last_voyage.id,
+                    'time_started': last_voyage.time_started
+                })
+        except Voyage.DoesNotExist:
+            return JsonResponse({})

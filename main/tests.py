@@ -18,7 +18,8 @@ class Tests(TestCase):
             "to_place": "asd",
             "from_place": "asd",
         })
-        self.assertEqual(r'{"id": 1}', r.content)
+        id = Voyage.objects.latest('time_started').id
+        self.assertEqual(r'{"id": '+str(id)+'}', r.content)
         self.assertEqual(Voyage.objects.all().count(), 1)
 
     def test_stop_voyage_stops_last_started(self):
@@ -66,6 +67,19 @@ class Tests(TestCase):
         self.assertIsNotNone(data['time_started'])
 
     def test_get_empty_json_if_not_started(self):
+        r = self.client.get('/voyage')
+        data = json.loads(r.content)
+        self.assertEqual({}, data)
+
+    def test_get_empty_json_if_ended(self):
+        r = self.client.post("/start_voyage", data={
+            "note": "asd",
+            "type": "asd",
+            "to_place": "asd",
+            "from_place": "asd2",
+        })
+        self.client.post('/stop_voyage')
+        latest_started = Voyage.objects.latest('time_started')
         r = self.client.get('/voyage')
         data = json.loads(r.content)
         self.assertEqual({}, data)

@@ -19,6 +19,21 @@ var Starter = React.createClass({
         }
     },
 
+    componentDidMount: function() {
+        this.serverRequest = $.get('/voyage', function (result) {
+            if ('time_started' in result) {
+                this.setState({
+                    time_started: result.time_started,
+                    button_text: 'Stop',
+                })
+            }
+        }.bind(this));
+    },
+
+    handleChange: function(e) {
+
+    },
+
     render: function() {
         return (
             <button id="start-button">{this.state.button_text}</button>

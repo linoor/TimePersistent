@@ -1,0 +1,33 @@
+button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.input-group {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.input-group-addon {
+    min-width:100px;
+    text-align:left;
+}
+
+#outer {
+    margin-top: 50px;
+}
+
+#timer {
+    font-size: 20px;
+}
+
+#min {
+    font-size: 500%;
+    margin-right: 2px;
+}
+
+#sec {
+    font-size: 200%;
+    margin-left: 20px;
+    margin-right: 2px;
+}

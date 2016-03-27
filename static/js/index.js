@@ -79,6 +79,14 @@ var Starter = React.createClass({
         }
     },
 
+    handleChange: function(key) {
+        return function (e) {
+            var state = {};
+            state[key] = e.target.value;
+            this.setState(state);
+        }.bind(this);
+    },
+
     render: function() {
         var delta = this.state.elapsed / 1000;
 
@@ -101,24 +109,27 @@ var Starter = React.createClass({
                         <span className="input-group-addon" id="basic-addon1">Start</span>
                         <input type="text" className="form-control"
                                value={this.state.from_place}
+                               onChange={this.handleChange('from_place')}
                                placeholder="Home, work etc." aria-describedby="basic-addon1"/>
                     </div>
                     <div className="input-group">
                         <span className="input-group-addon" id="basic-addon1">Destination</span>
                         <input type="text" className="form-control"
                                value={this.state.to_place}
+                               onChange={this.handleChange('to_place')}
                                placeholder="Home, work etc." aria-describedby="basic-addon1"/>
                     </div>
                     <div className="input-group">
                         <span className="input-group-addon" id="basic-addon1">Type</span>
                         <input type="text" className="form-control"
                                value={this.state.type}
+                               onChange={this.handleChange('type')}
                                placeholder="Car, Mpk etc." aria-describedby="basic-addon1"/>
                     </div>
                     <div className="input-group">
                         <span className="input-group-addon" id="basic-addon1">Notes</span>
                         <input type="text" className="form-control"
-                               value={this.state.note}
+                               onChange={this.handleChange('note')}
                                placeholder="Problems on the way etc. (in JSON)" aria-describedby="basic-addon1"/>
                     </div>
                     <button type="button" className="btn btn-default"

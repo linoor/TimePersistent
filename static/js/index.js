@@ -107,14 +107,12 @@ var Starter = React.createClass({
         return (
             <div id="outer">
                 <div className="row">
-                    <div className="col-lg-4 col-lg-offset-4">
-                        <div className="col-lg-6 col-lg-offset-3">
-                            <span id="timer"><span id="min">{minutes}</span>m<span id="sec">{seconds}</span>s</span>
-                        </div>
+                    <div className="col-md-4 col-md-offset-4">
+                        <span id="timer"><span id="min">{minutes}</span>m<span id="sec">{seconds}</span>s</span>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-lg-4 col-lg-offset-4">
+                    <div className="col-md-4 col-md-offset-4">
                         <div className="input-group">
                             <span className="input-group-addon" id="basic-addon1">Start</span>
                             <input type="text" className="form-control"
@@ -142,7 +140,7 @@ var Starter = React.createClass({
                                    onChange={this.handleChange('note')}
                                    placeholder="Problems on the way etc. (in JSON)" aria-describedby="basic-addon1"/>
                         </div>
-                        <div className="col-lg-4 col-lg-offset-4">
+                        <div className="col-md-4 col-md-offset-4">
                             <button type="button" className="btn btn-default"
                                     id="start-button" onClick={this.handleClick}>{button_text}</button>
                         </div>

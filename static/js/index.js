@@ -140,7 +140,7 @@ var Starter = React.createClass({
                                    onChange={this.handleChange('note')}
                                    placeholder="Problems on the way etc. (in JSON)" aria-describedby="basic-addon1"/>
                         </div>
-                        <div className="col-md-4 col-md-offset-4">
+                        <div className="col-xs-4 col-xs-offset-4">
                             <button type="button" className="btn btn-default"
                                     id="start-button" onClick={this.handleClick}>{button_text}</button>
                         </div>

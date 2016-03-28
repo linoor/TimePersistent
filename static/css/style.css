@@ -3,33 +3,38 @@ button {
     margin-top: 20px;
 }
 
+#start-button {
+    background: #16A085;
+    color: #ecf0f1;
+}
+
 .input-group {
     border: none;
-    margin: 10px;
+    margin: 3px;
 }
 
 .input-group-addon {
     min-width:100px;
     text-align:left;
+    background-color: #1ABC9C;
+    color: #ecf0f1;
 }
 
 #outer {
-    margin-top: 50px;
 }
 
 #timer {
     font-size: 20px;
     display: table;
     margin: 0 auto;
+    color: #2c3e50;
 }
 
 #min {
     font-size: 500%;
-    margin-right: 2px;
 }
 
 #sec {
     font-size: 200%;
     margin-left: 20px;
-    margin-right: 2px;
 }

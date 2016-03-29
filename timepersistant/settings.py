@@ -142,8 +142,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-if os.environ.get('DEVELOPMENT', None):
-    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 WEBPACK_LOADER = {
     'DEFAULT': {

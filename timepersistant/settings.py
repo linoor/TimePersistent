@@ -31,7 +31,7 @@ try:
 except ImportError:
     pass
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['timepersistent.herokuapp.com']
 
 # Application definition
 

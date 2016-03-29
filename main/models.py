@@ -5,14 +5,18 @@ from time import timezone
 import pytz as pytz
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from rest_framework import serializers
 
 
 class Place(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(blank=True, max_length=50)
 
+    def __repr__(self):
+        return str(self.name)
+
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class Voyage(models.Model):
@@ -42,3 +46,4 @@ class Voyage(models.Model):
             type=self.type,
             time_elapsed=(self.time_ended-self.time_started).seconds // 60 if self.time_ended else 0
         )
+

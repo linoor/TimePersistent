@@ -17,9 +17,9 @@ var Starter = React.createClass({
     getInitialState: function () {
         return {
             elapsed: 0,
-            from_place: 'home',
-            to_place: 'work',
-            type: 'car',
+            from_place: '',
+            to_place: '',
+            type: '',
             note: '',
             error: '',
             time_started: 0
@@ -29,9 +29,12 @@ var Starter = React.createClass({
     componentDidMount: function () {
         this.serverRequest = $.get('/voyage', function (result) {
             if ('time_started' in result) {
-                var time_started = Date.parse(result.time_started);
+                var time_started = result.time_started === null ? Date.parse(result.time_started) : 0;
                 this.setState({
-                    time_started: time_started
+                    time_started: time_started,
+                    from_place: result.to_place,
+                    to_place: result.from_place,
+                    type: result.type
                 })
             }
         }.bind(this));

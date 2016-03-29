@@ -40,7 +40,7 @@ def start_voyage(request):
 
         voyage.save()
         return JsonResponse({
-            "id": voyage.id
+            "id": voyage.id,
         })
     else:
         return HttpResponseNotFound('<h1>Page not found</h1>')
@@ -67,12 +67,13 @@ def voyage(request):
         try:
             last_voyage = Voyage.objects.latest('time_started')
 
-            if last_voyage.time_ended:
-                return JsonResponse({})
-            else:
-                return JsonResponse({
-                    'id': last_voyage.id,
-                    'time_started': last_voyage.time_started
-                })
+            return JsonResponse({
+                'id': last_voyage.id,
+                'time_started': last_voyage.time_started,
+                "from_place": str(last_voyage.from_place),
+                "to_place": str(last_voyage.to_place),
+                'time_ended': last_voyage.time_ended,
+                'type': last_voyage.type
+            })
         except Voyage.DoesNotExist:
             return JsonResponse({})

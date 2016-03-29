@@ -12,24 +12,14 @@ class Tests(TestCase):
         self.assertEqual(r.status_code, 400)
 
     def test_get_id(self):
-        r = self.client.post("/start_voyage", data={
-            "note": "asd",
-            "type": "asd",
-            "to_place": "asd",
-            "from_place": "asd",
-        })
+        r = self.start_voyage()
         id = Voyage.objects.latest('time_started').id
         self.assertEqual(r'{"id": '+str(id)+'}', r.content)
         self.assertEqual(Voyage.objects.all().count(), 1)
 
     def test_stop_voyage_stops_last_started(self):
         self.assertEqual(Voyage.objects.all().count(), 0)
-        r = self.client.post("/start_voyage", data={
-            "note": "asd",
-            "type": "asd",
-            "to_place": "asd",
-            "from_place": "asd",
-        })
+        r = self.start_voyage()
         id = json.loads(r.content)['id']
         self.assertEqual(Voyage.objects.all().count(), 1)
         r = self.client.post("/stop_voyage", data={})
@@ -38,28 +28,13 @@ class Tests(TestCase):
 
     def test_only_adds_place_once(self):
         self.assertEqual(Place.objects.all().count(), 0)
-        r = self.client.post("/start_voyage", data={
-            "note": "asd",
-            "type": "asd",
-            "to_place": "asd",
-            "from_place": "asd2",
-        })
+        self.start_voyage()
         self.assertEqual(Place.objects.all().count(), 2)
-        r = self.client.post("/start_voyage", data={
-            "note": "asd",
-            "type": "asd",
-            "to_place": "asd",
-            "from_place": "asd2",
-        })
+        self.start_voyage()
         self.assertEqual(Place.objects.all().count(), 2)
 
     def test_get_last_started_voyage_if_started(self):
-        r = self.client.post("/start_voyage", data={
-            "note": "asd",
-            "type": "asd",
-            "to_place": "asd",
-            "from_place": "asd2",
-        })
+        self.start_voyage()
         latest_started = Voyage.objects.latest('time_started')
         r = self.client.get('/voyage')
         data = json.loads(r.content)
@@ -71,16 +46,12 @@ class Tests(TestCase):
         data = json.loads(r.content)
         self.assertEqual({}, data)
 
-    def test_get_empty_json_if_ended(self):
+    def start_voyage(self):
         r = self.client.post("/start_voyage", data={
             "note": "asd",
             "type": "asd",
             "to_place": "asd",
             "from_place": "asd2",
         })
-        self.client.post('/stop_voyage')
-        latest_started = Voyage.objects.latest('time_started')
-        r = self.client.get('/voyage')
-        data = json.loads(r.content)
-        self.assertEqual({}, data)
+        return r
 

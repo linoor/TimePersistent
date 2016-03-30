@@ -22,19 +22,22 @@ var Starter = React.createClass({
             type: '',
             note: '',
             error: '',
-            time_started: 0
+            time_started: 0,
+            time_ended: 0
         }
     },
 
     componentDidMount: function () {
         this.serverRequest = $.get('/voyage', function (result) {
             if ('time_started' in result) {
-                var time_started = result.time_started === null ? Date.parse(result.time_started) : 0;
+                var time_started = result.time_started === null ? 0 : Date.parse(result.time_started);
+                var time_ended = result.time_ended === null ? 0 : Date.parse(result.time_ended);
                 this.setState({
                     time_started: time_started,
                     from_place: result.to_place,
                     to_place: result.from_place,
-                    type: result.type
+                    type: result.type,
+                    time_ended: time_ended
                 })
             }
         }.bind(this));
@@ -47,7 +50,7 @@ var Starter = React.createClass({
     },
 
     tick: function () {
-        if (this.state.time_started != 0) {
+        if (this.state.time_ended == 0) {
             this.setState({
                 elapsed: Math.abs(new Date() - this.state.time_started)
             });
@@ -58,10 +61,10 @@ var Starter = React.createClass({
 
     handleClick: function (event) {
         var self = this;
-        if (this.state.time_started != 0) {
+        if (this.state.time_ended == 0) {
             $.post('/stop_voyage', function (result) {
                 self.setState({
-                    time_started: 0
+                    time_ended: new Date()
                 })
             }).fail(function (result) {
                 self.setState({
@@ -76,7 +79,8 @@ var Starter = React.createClass({
                 note: this.state.note
             }, function (result) {
                 self.setState({
-                    time_started: new Date()
+                    time_started: new Date(),
+                    time_ended: 0
                 })
             })
         }
@@ -94,7 +98,7 @@ var Starter = React.createClass({
         var delta = this.state.elapsed / 1000;
 
         var minutes, seconds;
-        if (this.state.time_started != 0) {
+        if (this.state.time_ended == 0) {
             minutes = Math.floor(delta / 60);
             seconds = (delta % 60).toFixed(0);
         } else {
@@ -105,7 +109,7 @@ var Starter = React.createClass({
         minutes = ("0" + minutes).slice(-2);
         seconds = ("0" + seconds).slice(-2);
 
-        var button_text = this.state.time_started == 0 ? 'Start' : 'Stop';
+        var button_text = this.state.time_ended == 0 ? 'Stop' : 'Start';
 
         return (
             <div id="outer">

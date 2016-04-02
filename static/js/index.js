@@ -23,7 +23,7 @@ var Starter = React.createClass({
             note: '',
             error: '',
             time_started: 0,
-            time_ended: 0
+            time_ended: null
         }
     },
 
@@ -140,12 +140,6 @@ var Starter = React.createClass({
                                    value={this.state.type}
                                    onChange={this.handleChange('type')}
                                    placeholder="Car, Mpk etc." aria-describedby="basic-addon1"/>
-                        </div>
-                        <div className="input-group">
-                            <span className="input-group-addon" id="basic-addon1">Notes</span>
-                            <input type="text" className="form-control"
-                                   onChange={this.handleChange('note')}
-                                   placeholder="Problems on the way etc. (in JSON)" aria-describedby="basic-addon1"/>
                         </div>
                         <div className="col-xs-4 col-xs-offset-4">
                             <button type="button" className="btn btn-default"

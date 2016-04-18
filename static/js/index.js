@@ -27,8 +27,8 @@ var Starter = React.createClass({
         }
     },
 
-    componentDidMount: function () {
-        this.serverRequest = $.get('/voyage', function (result) {
+    componentDidMount: function (api) {
+        this.serverRequest = $.get('/api/voyage', function (result) {
             if ('time_started' in result) {
                 var time_started = result.time_started === null ? 0 : Date.parse(result.time_started);
                 var time_ended = result.time_ended === null ? 0 : Date.parse(result.time_ended);
@@ -62,7 +62,7 @@ var Starter = React.createClass({
     handleClick: function (event) {
         var self = this;
         if (this.state.time_ended == 0) {
-            $.post('/stop_voyage', function (result) {
+            $.post('api/stop_voyage', function (result) {
                 self.setState({
                     time_ended: new Date()
                 })
@@ -72,7 +72,7 @@ var Starter = React.createClass({
                 })
             })
         } else {
-            $.post('/start_voyage', data = {
+            $.post('api/start_voyage', data = {
                 from_place: this.state.from_place,
                 to_place: this.state.to_place,
                 type: this.state.type,

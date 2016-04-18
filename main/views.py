@@ -62,18 +62,27 @@ def main(request):
 
 
 @api_view(['GET'])
-def voyage(request):
+def voyage(request, voyage_id=None):
     if request.method == 'GET':
         try:
-            last_voyage = Voyage.objects.latest('time_started')
+            if voyage_id:
+                voyage = Voyage.objects.get(pk=voyage_id)
+            else:
+                # last voyage
+                voyage = Voyage.objects.latest('time_started')
 
             return JsonResponse({
-                'id': last_voyage.id,
-                'time_started': last_voyage.time_started,
-                "from_place": str(last_voyage.from_place),
-                "to_place": str(last_voyage.to_place),
-                'time_ended': last_voyage.time_ended,
-                'type': last_voyage.type
+                'id': voyage.id,
+                'time_started': voyage.time_started,
+                "from_place": str(voyage.from_place),
+                "to_place": str(voyage.to_place),
+                'time_ended': voyage.time_ended,
+                'type': voyage.type
             })
         except Voyage.DoesNotExist:
             return JsonResponse({})
+
+
+@api_view(['GET'])
+def stats_json(request):
+    pass

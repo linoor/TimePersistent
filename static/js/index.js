@@ -152,4 +152,10 @@ var Starter = React.createClass({
     }
 });
 
-ReactDOM.render(<App/>, document.getElementById('react-app'));
+if (document.getElementById('react-app')) {
+    ReactDOM.render(<App/>, document.getElementById('react-app'));
+}
+
+if (document.getElementById('voyage-react')) {
+    ReactDOM.render(<Voyage/>, document.getElementById('voyage-react'));
+}

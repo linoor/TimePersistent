@@ -86,3 +86,8 @@ def voyage(request, voyage_id=None):
 @api_view(['GET'])
 def stats_json(request):
     pass
+
+
+def voyage_show(request, voyage_id):
+    return render(request, template_name="voyage.html")
+

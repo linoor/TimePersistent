@@ -22,9 +22,10 @@ from main import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
+    url(r'^voyage/([0-9]+)', views.voyage_show),
     url(r'^api/start_voyage', views.start_voyage, name="start_voyage"),
     url(r'^api/stop_voyage', views.stop_voyage, name="stop_voyage"),
     url(r'^api/voyage/([0-9]+)', views.voyage),
-    url(r'^api/voyage', views.voyage, name='voyage'),
+    url(r'^api/voyage', views.voyage),
     url(r'^$', views.main, name="main"),
 ]

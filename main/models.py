@@ -39,7 +39,7 @@ class Voyage(models.Model):
         timezone = pytz.timezone('Poland')
         return """{date}
         {time_1} – {time_2} ({time_elapsed} min)
-        {from_place} → {to_place}
+        {from_place} ---> {to_place}
         {type}""".format(
             date=self.time_started.strftime('%Y-%m-%d'),
             time_1=self.time_started.astimezone(timezone).strftime('%H:%M'),

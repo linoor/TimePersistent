@@ -85,8 +85,8 @@ var Voyage = React.createClass({
                 time_started: time_started,
                 duration: result.duration,
                 time_ended: time_ended,
-                from_place: result.to_place,
-                to_place: result.from_place,
+                from_place: result.from_place,
+                to_place: result.to_place,
                 type: result.type
             });
         });

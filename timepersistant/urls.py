@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
     url(r'^voyage/([0-9]+)', views.voyage_show),
+    url(r'^voyage/last', views.voyage_show_last),
     url(r'^api/start_voyage', views.start_voyage, name="start_voyage"),
     url(r'^api/stop_voyage', views.stop_voyage, name="stop_voyage"),
     url(r'^api/voyage/([0-9]+)/add-time', views.modify_voyage('add')),

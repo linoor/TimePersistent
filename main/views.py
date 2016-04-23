@@ -2,7 +2,7 @@
 import json
 
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.timezone import now
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import ParseError
@@ -92,6 +92,10 @@ def stats_json(request):
 
 def voyage_show(request, voyage_id):
     return render(request, template_name="voyage.html")
+
+
+def voyage_show_last(request):
+    return redirect('/voyage/%d' % Voyage.objects.latest('time_started').id)
 
 
 def modify_voyage(oper):

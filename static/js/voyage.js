@@ -28,17 +28,27 @@ var Voyage = React.createClass({
                         <h1 className="voyage-title">Voyage {this.state.id}</h1>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-xs-12 text-center">
+                <div id="time-modify" className="row">
+                    <div className="col-xs-3 col-md-offset-1">
+                        <button type="button" className="btn btn-default">
+                            <span className="glyphicon glyphicon-minus"></span>
+                        </button>
+                    </div>
+                    <div className="col-xs-6 text-center col-md-4">
                         <span className="min">{minutes}</span><span>m</span>
                         <span className="sec">{seconds}</span><span>s</span>
                     </div>
+                    <div className="col-xs-3 text-center">
+                        <button type="button" className="btn btn-default">
+                            <span className="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
                 </div>
                 <div className="row">
-                    <div className="col-xs-3 col-xs-offset-3 text-center">
+                    <div className="col-xs-offset-1 col-xs-5 text-center">
                         <h2 className="voyage-place">{this.state.from_place}</h2>
                     </div>
-                    <div className="col-xs-3 text-center">
+                    <div className="col-xs-5 text-center">
                         <h2 className="voyage-place">{this.state.to_place}</h2>
                     </div>
                 </div>

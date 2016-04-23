@@ -39,3 +39,6 @@ button {
     margin-left: 20px;
 }
 
+#time-modify button {
+    height: 100px;
+}

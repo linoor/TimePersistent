@@ -93,3 +93,21 @@ def stats_json(request):
 def voyage_show(request, voyage_id):
     return render(request, template_name="voyage.html")
 
+
+def modify_voyage(oper):
+    if oper == 'add':
+        @api_view(['POST'])
+        def fun(request, voyage_id):
+            voyage = Voyage.objects.get(pk=voyage_id)
+            voyage.duration += 60
+            voyage.save()
+            return HttpResponse('Time has been added successfully')
+    elif oper == 'decrease':
+        @api_view(['POST'])
+        def fun(request, voyage_id):
+            voyage = Voyage.objects.get(pk=voyage_id)
+            if voyage.duration >= 60:
+                voyage.duration -= 60
+                voyage.save()
+            return HttpResponse('Time has been decreased successfully')
+    return fun

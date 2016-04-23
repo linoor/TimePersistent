@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^voyage/([0-9]+)', views.voyage_show),
     url(r'^api/start_voyage', views.start_voyage, name="start_voyage"),
     url(r'^api/stop_voyage', views.stop_voyage, name="stop_voyage"),
+    url(r'^api/voyage/([0-9]+)/add-time', views.modify_voyage('add')),
+    url(r'^api/voyage/([0-9]+)/decrease-time', views.modify_voyage('decrease')),
     url(r'^api/voyage/([0-9]+)', views.voyage),
     url(r'^api/voyage', views.voyage),
     url(r'^$', views.main, name="main"),

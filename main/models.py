@@ -38,13 +38,22 @@ class Voyage(models.Model):
 
     def __str__(self):
         timezone = pytz.timezone('Poland')
-        return """{date} ---------- {time_1} - {time_2} ({time_elapsed} min) ---------- {from_place} ---> {to_place} ---------- {type}""".format(
-            date=self.time_started.strftime('%Y-%m-%d'),
-            time_1=self.time_started.astimezone(timezone).strftime('%H:%M'),
-            time_2=self.time_ended.astimezone(timezone).strftime('%H:%M') if self.time_ended else '',
-            from_place=self.from_place,
-            to_place=self.to_place,
-            type=self.type,
-            time_elapsed=(self.time_ended-self.time_started).seconds // 60 if self.time_ended else 0
-        )
-
+        return '{date}'.format(
+                date=self.time_started.strftime('%Y-%m-%d'),
+               ) + \
+               '-' * 10 + \
+               '{time_1} - {time_2} ' + \
+               '({time_elapsed} min) '.format(
+                   time_1=self.time_started.astimezone(timezone).strftime('%H:%M'),
+                   time_2=self.time_ended.astimezone(timezone).strftime('%H:%M') if self.time_ended else '',
+                   time_elapsed=self.duration / 60
+               ).ljust(20, '-') + \
+               ' {from_place} '.format(
+                   from_place=self.from_place
+               ).ljust(20, '-') + \
+               '> {to_place} '.format(
+                   to_place=self.to_place,
+               ).ljust(20, '-') + \
+               ' {type}'.format(
+                   type=self.type,
+               )

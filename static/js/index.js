@@ -66,6 +66,8 @@ var Starter = React.createClass({
                 self.setState({
                     time_ended: new Date()
                 })
+                var id = /\d+/.exec(result);
+                window.location.pathname += 'voyage/' + id;
             }).fail(function (result) {
                 self.setState({
                     error: result

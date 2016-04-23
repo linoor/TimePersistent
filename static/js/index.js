@@ -124,27 +124,27 @@ var Starter = React.createClass({
                     <div className="col-md-8 col-md-offset-2">
                         <div className="input-group">
                             <span className="input-group-addon" id="basic-addon1">Start</span>
-                            <input type="text" className="form-control"
+                            <input type="text" className="form-control input-lg"
                                    value={this.state.from_place}
                                    onChange={this.handleChange('from_place')}
                                    placeholder="Home, work etc." aria-describedby="basic-addon1"/>
                         </div>
                         <div className="input-group">
                             <span className="input-group-addon" id="basic-addon1">Destination</span>
-                            <input type="text" className="form-control"
+                            <input type="text" className="form-control input-lg"
                                    value={this.state.to_place}
                                    onChange={this.handleChange('to_place')}
                                    placeholder="Home, work etc." aria-describedby="basic-addon1"/>
                         </div>
                         <div className="input-group">
                             <span className="input-group-addon" id="basic-addon1">Type</span>
-                            <input type="text" className="form-control"
+                            <input type="text" className="form-control input-lg"
                                    value={this.state.type}
                                    onChange={this.handleChange('type')}
                                    placeholder="Car, Mpk etc." aria-describedby="basic-addon1"/>
                         </div>
                         <div className="col-xs-4 col-xs-offset-4">
-                            <button type="button" className="btn btn-default"
+                            <button type="button" className="btn btn-default input-lg"
                                     id="start-button" onClick={this.handleClick}>{button_text}</button>
                         </div>
                     </div>

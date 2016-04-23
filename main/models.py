@@ -42,10 +42,11 @@ class Voyage(models.Model):
                 date=self.time_started.strftime('%Y-%m-%d'),
                ) + \
                '-' * 10 + \
-               '{time_1} - {time_2} ' + \
+               '{time_1} - {time_2} '.format(
+                    time_1=self.time_started.astimezone(timezone).strftime('%H:%M'),
+                    time_2=self.time_ended.astimezone(timezone).strftime('%H:%M') if self.time_ended else '',
+               ) + \
                '({time_elapsed} min) '.format(
-                   time_1=self.time_started.astimezone(timezone).strftime('%H:%M'),
-                   time_2=self.time_ended.astimezone(timezone).strftime('%H:%M') if self.time_ended else '',
                    time_elapsed=self.duration / 60
                ).ljust(20, '-') + \
                ' {from_place} '.format(

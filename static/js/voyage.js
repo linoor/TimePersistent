@@ -14,6 +14,17 @@ var Voyage = React.createClass({
         }
     },
 
+    handleClick: function(url, dur) {
+        self = this;
+        return function(event) {
+            $.post('/api/voyage/'+self.state.id+'/'+url, function(result) {
+                self.setState({
+                    duration: self.state.duration + dur
+                })
+            })
+        }
+    },
+
     render: function() {
         var minutes = (this.state.duration / 60).toFixed(0);
         var seconds = this.state.duration % 60;
@@ -30,7 +41,7 @@ var Voyage = React.createClass({
                 </div>
                 <div id="time-modify" className="row">
                     <div className="col-xs-3 col-md-offset-1">
-                        <button type="button" className="btn btn-default">
+                        <button type="button" className="btn btn-default" onClick={this.handleClick('decrease-time', -60)}>
                             <span className="glyphicon glyphicon-minus"></span>
                         </button>
                     </div>
@@ -39,7 +50,7 @@ var Voyage = React.createClass({
                         <span className="sec">{seconds}</span><span>s</span>
                     </div>
                     <div className="col-xs-3 text-center">
-                        <button type="button" className="btn btn-default">
+                        <button type="button" className="btn btn-default" onClick={this.handleClick('add-time', 60)}>
                             <span className="glyphicon glyphicon-plus"></span>
                         </button>
                     </div>

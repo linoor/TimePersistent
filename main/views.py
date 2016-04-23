@@ -2,7 +2,7 @@
 import json
 
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.timezone import now
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import ParseError
@@ -53,6 +53,7 @@ def stop_voyage(request):
         if voyage.time_ended:
             return HttpResponse("Voyage {id} has already been stopped".format(id=voyage.id))
         voyage.time_ended = now()
+        voyage.duration = (voyage.time_ended - voyage.time_started).seconds
         voyage.save()
         return HttpResponse("Voyage {id} has been stopped".format(id=voyage.id))
 
@@ -77,7 +78,8 @@ def voyage(request, voyage_id=None):
                 "from_place": str(voyage.from_place),
                 "to_place": str(voyage.to_place),
                 'time_ended': voyage.time_ended,
-                'type': voyage.type
+                'type': voyage.type,
+                'duration': voyage.duration
             })
         except Voyage.DoesNotExist:
             return JsonResponse({})
@@ -86,3 +88,30 @@ def voyage(request, voyage_id=None):
 @api_view(['GET'])
 def stats_json(request):
     pass
+
+
+def voyage_show(request, voyage_id):
+    return render(request, template_name="voyage.html")
+
+
+def voyage_show_last(request):
+    return redirect('/voyage/%d' % Voyage.objects.latest('time_started').id)
+
+
+def modify_voyage(oper):
+    if oper == 'add':
+        @api_view(['POST'])
+        def fun(request, voyage_id):
+            voyage = Voyage.objects.get(pk=voyage_id)
+            voyage.duration += 60
+            voyage.save()
+            return HttpResponse('Time has been added successfully')
+    elif oper == 'decrease':
+        @api_view(['POST'])
+        def fun(request, voyage_id):
+            voyage = Voyage.objects.get(pk=voyage_id)
+            if voyage.duration >= 60:
+                voyage.duration -= 60
+                voyage.save()
+            return HttpResponse('Time has been decreased successfully')
+    return fun

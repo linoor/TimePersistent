@@ -30,11 +30,15 @@ button {
     color: #2c3e50;
 }
 
-#min {
+.min {
     font-size: 500%;
 }
 
-#sec {
+.sec {
     font-size: 200%;
     margin-left: 20px;
+}
+
+#time-modify button {
+    height: 100px;
 }

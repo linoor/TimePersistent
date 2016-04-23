@@ -115,7 +115,7 @@ var Starter = React.createClass({
             <div id="outer">
                 <div className="row">
                     <div className="col-md-4 col-md-offset-4">
-                        <span id="timer"><span id="min">{minutes}</span>m<span id="sec">{seconds}</span>s</span>
+                        <span id="timer"><span className="min">{minutes}</span>m<span className="sec">{seconds}</span>s</span>
                     </div>
                 </div>
                 <div className="row">

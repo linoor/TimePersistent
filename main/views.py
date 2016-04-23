@@ -53,6 +53,7 @@ def stop_voyage(request):
         if voyage.time_ended:
             return HttpResponse("Voyage {id} has already been stopped".format(id=voyage.id))
         voyage.time_ended = now()
+        voyage.duration = (voyage.time_ended - voyage.time_started).seconds
         voyage.save()
         return HttpResponse("Voyage {id} has been stopped".format(id=voyage.id))
 
@@ -77,7 +78,8 @@ def voyage(request, voyage_id=None):
                 "from_place": str(voyage.from_place),
                 "to_place": str(voyage.to_place),
                 'time_ended': voyage.time_ended,
-                'type': voyage.type
+                'type': voyage.type,
+                'duration': voyage.duration
             })
         except Voyage.DoesNotExist:
             return JsonResponse({})
